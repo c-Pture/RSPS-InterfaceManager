@@ -1,41 +1,31 @@
 /**
-
 	c-pture/Pegasus (Manu on Rune-Server)
 	Copyright (c) 2022 - Pegasus/C-Pture Team
 	Written by Manuel K. - Germany
-
+	Version: 1.1.0-beta.1
+	
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
-
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
  */
 package main.pegasus.im;
 
 import java.util.HashMap;
 
-/**
- * 
- * @author manu
- * This class is used to create an instance of a interface
- *
- */
+public abstract class RSAbstractInterface {
 
-public abstract class RSInterface {
-
-	private int interfaceId;
+	private int interfaceId = -1;
 	
 	private HashMap<String, Object> attributes = new HashMap<String, Object>();
 	
-	public RSInterface(int interfaceId) {
+	public RSAbstractInterface(int interfaceId) {
 		this.interfaceId = interfaceId;
 	}
 	
@@ -43,7 +33,7 @@ public abstract class RSInterface {
 		return this.interfaceId;
 	}
 	
-	public RSInterface setAttribute(String key, Object value) {
+	public RSAbstractInterface setAttribute(String key, Object value) {
 		if(attributes.containsKey(key)) {
 			attributes.replace(key, value);
 			return this;
@@ -52,12 +42,12 @@ public abstract class RSInterface {
 		return this;
 	}
 	
-	public RSInterface setChildId(int childId) {
+	public RSAbstractInterface setChildId(int childId) {
 		this.setAttribute("CHILD_ID", childId);
 		return this;
 	}
 	
-	public RSInterface setWindowId(int windowId) {
+	public RSAbstractInterface setWindowId(int windowId) {
 		this.setAttribute("WINDOW_ID", windowId);
 		return this;
 	}
@@ -74,6 +64,41 @@ public abstract class RSInterface {
 	
 	public int getWindowId() {
 		return (Integer) getAttribute("WINDOW_ID");
+	}
+	
+	public RSAbstractInterface finalizeOperation() {
+		if(!checkBasicSyntax()) 
+			return null;
+		return this;
+	}
+	
+	/**
+	 * Just a basic list of the essential attributes which should be contained within the
+	 * interface. Makes it a bit easier to check them all
+	 */
+	private String[] essential_attributes = {
+			"WALKABLE",
+			"WINDOW_ID",
+			"CHILD_ID",
+			"GAMEFRAME"
+	};
+	
+	/**
+	 * Check if the basic syntax of the interface is correct
+	 * Checking for essential attributes in order to properly open the interface
+	 * If some essential information is missing it returns false
+	 * If all essential information is contained it returns true
+	 * @param interface_
+	 * @return all essential attributes are contained in the interface
+	 */
+	public boolean checkBasicSyntax() {
+		for(int i = 0; i < essential_attributes.length; i++) {
+			if(getAttribute(essential_attributes[i]) == null) {
+				System.out.println("Error! Syntax not correct! Missing: " + essential_attributes[i]);
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	/**
