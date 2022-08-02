@@ -18,7 +18,7 @@ public class RSInterfaceManager {
 		int windowId = (Integer) interface_.getAttribute("WINDOW_ID");
 		int childId = (Integer) interface_.getAttribute("CHILD_ID");
 		
-		if(interfaceType == "CHATBOX") {
+		if(interfaceType.equals("CHATBOX")) {
 			
 		}
 		if(interfaceType.equals("TAB")) {
@@ -28,7 +28,6 @@ public class RSInterfaceManager {
 			
 		}
 		current_interface = interface_;
-		
 	}
 	
 	/**
