@@ -1,5 +1,5 @@
 # ![STAR](https://cpture.xyz/assets/github/misc/repos/img/scroll.png) InterfaceManager
-![Java-build](https://img.shields.io/badge/build--java-1.0.0--beta.1-blue?style=for-the-badge)  ![CSharp-build](https://img.shields.io/badge/build--CSharp-1.0.0--beta.1-blue?style=for-the-badge)
+![Java-build](https://img.shields.io/badge/build--java-1.1.0--beta.1-blue?style=for-the-badge)  ![CSharp-build](https://img.shields.io/badge/build--CSharp-1.0.0--beta.1-blue?style=for-the-badge)
 
 ## ![STAR](https://cpture.xyz/assets/github/misc/repos/img/star.png) About the InterfaceManager
 
