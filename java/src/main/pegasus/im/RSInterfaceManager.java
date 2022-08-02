@@ -28,10 +28,10 @@ public class RSInterfaceManager {
 	 * Currently only support for chatbox interface and screen interfaces
 	 */
 
-	private transient RSAbstractInterface current_onscreen_interface = null;
-	private transient RSAbstractInterface current_chat_interface = null;
+	private transient RSAbstractInterface current_onscreen_interface 	= null;
+	private transient RSAbstractInterface current_chat_interface 		= null;
 	
-	private transient List<RSAbstractInterface> gameframe_interfaces = new ArrayList<RSAbstractInterface>();
+	private transient List<RSAbstractInterface> gameframe_interfaces 	= new ArrayList<RSAbstractInterface>();
 	
 	private Player player;
 	
