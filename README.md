@@ -68,9 +68,10 @@ Before you start sending any interfaces make sure to initialize everything prope
 
 ## Attributes
 
-| Attribute | Type    | Essential | Description |
-| :---:     | :---:   | :---:     | ----------- |
-| WINDOW_ID | Integer | **X**     | Set the window Id of the interface |
-| CHILD_ID  | Integer | **X**     | Set the child Id of the interface |
-| WALKABLE  | Boolean | **X**     | Set *true* or *false* to specify if this interface will be closed when walking or not |
-| GAMEFRAME | Boolean | **X**     | Set *true* or *false* to specify if the interface is part of the gameframe |
+| Attribute | Type    | Essential | Description | Minimum version required |
+| :---:     | :---:   | :---:     | ----------- | :---: |
+| WINDOW_ID | Integer | **X**     | Set the window Id of the interface | 1.0.0-beta.1 |
+| CHILD_ID  | Integer | **X**     | Set the child Id of the interface | 1.0.0-beta.1 |
+| WALKABLE  | Boolean | **X**     | Set *true* or *false* to specify if this interface will be closed when walking or not | 1.0.0-beta.1 |
+| GAMEFRAME | Boolean | **X**     | Set *true* or *false* to specify if the interface is part of the gameframe | 1.0.0-beta.1 |
+| LOCKED    | Boolean |           | Set *true* or *false* to specify if the interface can be overwritten by the next interface / If it needs to be closed properly 					before opening a new interface | 1.2.0
