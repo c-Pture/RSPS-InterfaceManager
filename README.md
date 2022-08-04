@@ -39,7 +39,8 @@ Before you start sending any interfaces make sure to initialize everything prope
 
 - Adjust the code to your needs and fill in the required methods from your source such as open and close interface packets
   The positions are tagged within the source code and you can find them by the following tag
-      >**// !-- IMPORTANT --!** 
+      
+      // !-- IMPORTANT --!
       
 
 
