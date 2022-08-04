@@ -2,7 +2,7 @@
 	c-pture/Pegasus (Manu on Rune-Server)
 	Copyright (c) 2022 - Pegasus/C-Pture Team
 	Written by Manuel K. - Germany
-	Version: 1.1.0-beta.1
+	Version: 1.2.0
 	
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,13 +19,18 @@ package main.pegasus.im;
 
 import java.util.HashMap;
 
+import com.rs2hd.model.Player;
+
 public abstract class RSAbstractInterface {
 
 	private int interfaceId = -1;
 	
 	private HashMap<String, Object> attributes = new HashMap<String, Object>();
 	
-	public RSAbstractInterface(int interfaceId) {
+	public Player player;
+	
+	public RSAbstractInterface(Player player, int interfaceId) {
+		this.player = player;
 		this.interfaceId = interfaceId;
 	}
 	
@@ -51,9 +56,9 @@ public abstract class RSAbstractInterface {
 		this.setAttribute("WINDOW_ID", windowId);
 		return this;
 	}
- 	
+	
 	public Object getAttribute(String key) {
-		if(attributes.get(key) == null)
+		if(attributes.get(key) == null || !attributes.containsKey(key))
 			return null;
 		return attributes.get(key);
 	}
@@ -64,6 +69,12 @@ public abstract class RSAbstractInterface {
 	
 	public int getWindowId() {
 		return (Integer) getAttribute("WINDOW_ID");
+	}
+	
+	public boolean isLocked() {
+		if(getAttribute("LOCKED") != null)
+			return (Boolean) getAttribute("LOCKED");
+		return false;
 	}
 	
 	public RSAbstractInterface finalizeOperation() {
