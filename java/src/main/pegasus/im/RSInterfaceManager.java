@@ -2,7 +2,7 @@
 	c-pture/Pegasus (Manu on Rune-Server)
 	Copyright (c) 2022 - Pegasus/C-Pture Team
 	Written by Manuel K. - Germany
-	Version: 1.1.0-beta.1
+	Version: 1.2.0
 	
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,8 @@ package main.pegasus.im;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.rs2hd.model.Player;
+
 import main.pegasus.im.impl.DefaultRSInterface;
 
 public class RSInterfaceManager {
@@ -35,11 +37,11 @@ public class RSInterfaceManager {
 	
 	private Player player;
 	
-	public RSInterfaceManager() {
+	public RSInterfaceManager() {	//This is for testing purposes only
 		
 	}
 	
-	public RSInterfaceManager(Player player) {
+	public RSInterfaceManager(Player player) {	//This is the actual constructor to use for the player
 		this.player = player;
 	}
 	
@@ -52,9 +54,11 @@ public class RSInterfaceManager {
 			return;
 		if(!interface_.checkBasicSyntax()) //Attributes missing
 			return;
+		
 		int windowId 		= (Integer) interface_.getAttribute("WINDOW_ID");
 		int childId 		= (Integer) interface_.getAttribute("CHILD_ID");
 		boolean walkable 	= (Boolean) interface_.getAttribute("WALKABLE");
+		int showId			= (Boolean) walkable ? 1 : 0;
 		boolean gameframe 	= (Boolean) interface_.getAttribute("GAMEFRAME");
 		boolean chatbox 	= (Integer) windowId == 752 ? true : false;
 		
@@ -67,6 +71,20 @@ public class RSInterfaceManager {
 			}
 			return;
 		}
+		
+		//Check if prev interface is locked and if new interface can be opened
+		if(chatbox && (current_chat_interface != null) || 			//Chatbox Interface
+				!chatbox && (current_onscreen_interface != null)) {	//Regular Interface
+			if(current_chat_interface.isLocked()) {
+				//Do something or don't for example send a message 'Please finish what you are doing.'
+				return;
+			}
+			if(current_onscreen_interface.isLocked()) {
+				//Do something or don't for example send a message 'Please finish what you are doing.'
+				return;
+			}
+		}
+		
 		//send interface
 		// !-- IMPORTANT --!
 		// Add your packet to open the interface right here!
@@ -77,7 +95,6 @@ public class RSInterfaceManager {
 			return;
 		}
 		current_onscreen_interface = interface_;
-		return;
 	}
 	
 	public void closeAllInterfaces(boolean triggerIsWalking) {
@@ -92,8 +109,8 @@ public class RSInterfaceManager {
 		if(current_onscreen_interface.getInterfaceId() == -1) {
 			return;
 		}
-		int windowId 	= (Integer) current_onscreen_interface.getAttribute("WINDOW_ID");
-		int childId 	= (Integer) current_onscreen_interface.getAttribute("CHILD_ID");
+		int windowId = (Integer) current_onscreen_interface.getAttribute("WINDOW_ID");
+		int childId = (Integer) current_onscreen_interface.getAttribute("CHILD_ID");
 		if(triggerIsWalking && (Boolean) current_onscreen_interface.getAttribute("WALKABLE") == true) {
 			return;
 		}
@@ -109,8 +126,8 @@ public class RSInterfaceManager {
 		if(current_chat_interface.getInterfaceId() == -1) {
 			return;
 		}
-		int windowId 	= (Integer) current_chat_interface.getAttribute("WINDOW_ID");
-		int childId 	= (Integer) current_chat_interface.getAttribute("CHILD_ID");
+		int windowId = (Integer) current_chat_interface.getAttribute("WINDOW_ID");
+		int childId = (Integer) current_chat_interface.getAttribute("CHILD_ID");
 		if(triggerIsWalking && (Boolean) current_chat_interface.getAttribute("WALKABLE") == true) {
 			return;
 		}
@@ -121,13 +138,13 @@ public class RSInterfaceManager {
 	
 	public RSAbstractInterface getCurrentOnScreenInterface() {
 		if(current_onscreen_interface == null)
-			return new DefaultRSInterface(-1);
+			return new DefaultRSInterface(player, -1);
 		return current_onscreen_interface;
 	}
 	
 	public RSAbstractInterface getCurrentChatBoxInterface() {
 		if(current_chat_interface == null)
-			return new DefaultRSInterface(-1);
+			return new DefaultRSInterface(player, -1);
 		return current_chat_interface;
 	}
 	
