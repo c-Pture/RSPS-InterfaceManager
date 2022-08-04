@@ -2,7 +2,7 @@
 	c-pture/Pegasus (Manu on Rune-Server)
 	Copyright (c) 2022 - Pegasus/C-Pture Team
 	Written by Manuel K. - Germany
-	Version: 1.1.0-beta.1
+	Version: 1.2.0
 	
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,8 +21,8 @@ import main.pegasus.im.RSAbstractInterface;
 
 public class DefaultRSInterface extends RSAbstractInterface {
 
-	public DefaultRSInterface(int interfaceId) {
-		super(interfaceId);
+	public DefaultRSInterface(Player player, int interfaceId) {
+		super(player, interfaceId);
 	}
 
 	@Override
