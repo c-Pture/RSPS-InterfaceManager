@@ -58,7 +58,7 @@ public class RSInterfaceManager {
 		int windowId 		= (Integer) interface_.getAttribute("WINDOW_ID");
 		int childId 		= (Integer) interface_.getAttribute("CHILD_ID");
 		boolean walkable 	= (Boolean) interface_.getAttribute("WALKABLE");
-		int showId			= (Boolean) walkable ? 1 : 0;
+		int showId		= (Boolean) walkable ? 1 : 0;
 		boolean gameframe 	= (Boolean) interface_.getAttribute("GAMEFRAME");
 		boolean chatbox 	= (Integer) windowId == 752 ? true : false;
 		
@@ -109,8 +109,8 @@ public class RSInterfaceManager {
 		if(current_onscreen_interface.getInterfaceId() == -1) {
 			return;
 		}
-		int windowId = (Integer) current_onscreen_interface.getAttribute("WINDOW_ID");
-		int childId = (Integer) current_onscreen_interface.getAttribute("CHILD_ID");
+		int windowId 	= (Integer) current_onscreen_interface.getAttribute("WINDOW_ID");
+		int childId 	= (Integer) current_onscreen_interface.getAttribute("CHILD_ID");
 		if(triggerIsWalking && (Boolean) current_onscreen_interface.getAttribute("WALKABLE") == true) {
 			return;
 		}
@@ -126,8 +126,8 @@ public class RSInterfaceManager {
 		if(current_chat_interface.getInterfaceId() == -1) {
 			return;
 		}
-		int windowId = (Integer) current_chat_interface.getAttribute("WINDOW_ID");
-		int childId = (Integer) current_chat_interface.getAttribute("CHILD_ID");
+		int windowId 	= (Integer) current_chat_interface.getAttribute("WINDOW_ID");
+		int childId 	= (Integer) current_chat_interface.getAttribute("CHILD_ID");
 		if(triggerIsWalking && (Boolean) current_chat_interface.getAttribute("WALKABLE") == true) {
 			return;
 		}
